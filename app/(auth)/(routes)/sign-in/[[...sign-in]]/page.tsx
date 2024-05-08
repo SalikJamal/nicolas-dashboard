@@ -1,5 +1,8 @@
 "use client"
 
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { useSignIn } from "@clerk/nextjs"
 import * as Clerk from '@clerk/elements/common'
 import * as SignIn from '@clerk/elements/sign-in'
 
@@ -9,10 +12,22 @@ import { Input } from '@/components/ui/input'
 
 export default function SignInPage() {
 
+    const router = useRouter()
+    const { signIn } = useSignIn()
+
+    const signInWithPasskey = async () => {
+        try {
+            await signIn?.authenticateWithPasskey({ flow: 'discoverable' })
+          router.push('/')
+        } catch (err) {
+          console.log(err)
+        }
+      }
+
     return (
-        <SignIn.Root path="/sign-in">
-            <SignIn.Step className="flex flex-col gap-10" name="start">
-                <h1 className="text-3xl font-medium">
+        <SignIn.Root>
+            <SignIn.Step className="flex flex-col gap-5" name="start">
+                <h1 className="text-3xl font-medium mb-5">
                     Sign In to Nicolas Dashboard
                 </h1>
 
@@ -21,30 +36,42 @@ export default function SignInPage() {
                 <Clerk.Field name="identifier">
                     <Clerk.Label>Email</Clerk.Label>
                     <Clerk.Input asChild>
-                        <Input 
+                        <Input
+                            name="identifier"
                             type="email"
                             placeholder="Your email address"
+                            required
                         />
                     </Clerk.Input>
-                    <Clerk.FieldError>
-                        {({ message, code }: { message: string; code: string; }) => (
-                            <span className="block mt-2 text-sm text-red-600">
-                                {code === "form_param_nil" ? "Email is required" : message}
-                            </span>
-                        )}
-                    </Clerk.FieldError>
+                    <Clerk.FieldError className="block mt-2 text-sm text-red-600" />
                 </Clerk.Field>
+
+                <Button 
+                    variant="link" 
+                    type="button" 
+                    onClick={signInWithPasskey}
+                >
+                    Use passkeys instead
+                </Button>
 
                 <SignIn.Action submit asChild>
                     <Button>
-                        Sign In with Email
+                        Send Magic Link
                     </Button>
                 </SignIn.Action>
+
+                <p className="text-center text-sm text-zinc-500">
+                    <Link className="font-medium text-zinc-950 decoration-zinc-950/20 underline-offset-4 outline-none hover:text-zinc-700 hover:underline focus-visible:underline" href="/sign-up">
+                        Create an account
+                    </Link>
+                </p>
             </SignIn.Step>
 
-            <SignIn.Step name="verifications">
+            
+
+            <SignIn.Step className="flex flex-col gap-5" name="verifications">
                 <SignIn.Strategy name="email_link">
-                    Send link to your email
+                    <p className="text-lg sm:text-base">Check your email for sign in link.</p>
                 </SignIn.Strategy>
             </SignIn.Step>
         </SignIn.Root>

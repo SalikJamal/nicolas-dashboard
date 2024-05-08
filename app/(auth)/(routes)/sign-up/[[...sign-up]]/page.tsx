@@ -5,11 +5,12 @@ import * as SignUp from '@clerk/elements/sign-up'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import Link from 'next/link'
 
 
 export default function SignUpPage() {
     return (
-        <SignUp.Root path="/sign-up">
+        <SignUp.Root>
             <SignUp.Step className="flex flex-col gap-8" name="start">
                 <h1 className="text-3xl font-medium">
                     Sign Up to Nicolas Dashboard
@@ -61,6 +62,12 @@ export default function SignUpPage() {
                         Send Magic Link
                     </Button>
                 </SignUp.Action>
+                <p className="text-center text-sm text-zinc-500">
+                    Have an account? {" "} 
+                    <Link className="font-medium text-zinc-950 decoration-zinc-950/20 underline-offset-4 outline-none hover:text-zinc-700 hover:underline focus-visible:underline" href="/sign-in">
+                        Sign In
+                    </Link>
+                </p>
             </SignUp.Step>
 
             <SignUp.Step className="flex flex-col gap-5" name="verifications">
