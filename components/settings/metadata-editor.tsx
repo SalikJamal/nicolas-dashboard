@@ -1,6 +1,6 @@
 export default function MetadataEditor() {
     return (
-        <div>
+        <div className="px-5">
             METADATA EDITOR
         </div>
     )
