@@ -2,13 +2,13 @@ import { ChangeEvent } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 
-interface IFaviconUploadProps {
+interface IOGImageUploadProps {
     value: string;
     onChange: (value: string) => void;
     disabled?: boolean;
 }
 
-export default function FaviconUpload({ value, onChange, disabled }: IFaviconUploadProps) {
+export default function OGImageUpload({ value, onChange, disabled }: IOGImageUploadProps) {
     
     const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
 
@@ -29,8 +29,8 @@ export default function FaviconUpload({ value, onChange, disabled }: IFaviconUpl
                 className="size-[75px] rounded-md object-cover"
                 sizes="100%"
                 quality={100}
-                src={value || "https://placehold.co/75x75/png"}
-                alt="favicon"
+                src={value || "https://placehold.co/1200x630/png"}
+                alt="open graph image"
                 width={75}
                 height={75}
             />

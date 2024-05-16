@@ -8,17 +8,24 @@ import { Input } from "@/components/ui/input"
 import { 
     Form, 
     FormControl, 
+    FormDescription, 
     FormField, 
     FormItem, 
     FormLabel, 
     FormMessage
 } from "@/components/ui/form"
 import FaviconUpload from "@/components/ui/favicon-upload"
+import OGImageUpload from "@/components/ui/og-image-upload"
+import { Textarea } from "@/components/ui/textarea"
 
 
 type MetadataFormValues = z.infer<typeof formSchema>
 const formSchema = z.object({
-    label: z.string().min(1, { message: "Name is required" }),
+    pageTitle: z.string().min(1, { message: "Page title is required" }),
+    metaDescription: z.string().min(1, { message: "Meta description is required" }),
+    metaKeywords: z.string().min(1, { message: "Meta keyword is required" }),
+    ogTitle: z.string().min(1, { message: "OG title is required" }),
+    ogDescription: z.string().min(1, { message: "OG description is required" }),
     imageURL: z.string().min(1, { message: "Favicon is required" })
 })
 
@@ -30,7 +37,11 @@ export default function MetadataEditor() {
     const form = useForm<MetadataFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            label: "",
+            pageTitle: "Startt - We help build your community",
+            metaDescription: "We help build your community before you start building",
+            metaKeywords: "Startup, landing page, page builder",
+            ogTitle: "Startt - We help build your community",
+            ogDescription: "We help build your community before you start building",
             imageURL: ""
         }
     })
@@ -47,43 +58,147 @@ export default function MetadataEditor() {
     }
 
     return (
-        <div className="flex flex-col gap-14 px-5">
+        <div className="flex flex-col p-5">
             <Form {...form}>
-                <form className="space-y-8 w-full" onSubmit={form.handleSubmit(onSubmit)}>
-                    <FormField 
-                        control={form.control}
-                        name="imageURL"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Favicon</FormLabel>
-                                <FormControl>
-                                    <FaviconUpload 
-                                        value={field.value}
-                                        disabled={loading}
-                                        onChange={value => field.onChange(value)}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField 
-                        control={form.control}
-                        name="label"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel className="text-stone-400">Page title</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        placeholder="Billboard label"
-                                        disabled={loading}
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                <form className="flex flex-col gap-20 w-full" onSubmit={form.handleSubmit(onSubmit)}>
+                    <div>
+                        <FormField
+                            control={form.control}
+                            name="imageURL"
+                            render={({ field }) => (
+                                <FormItem >
+                                    <FormLabel className="text-base">Favicon</FormLabel>
+                                    <FormControl>
+                                        <FaviconUpload 
+                                            value={field.value}
+                                            disabled={loading}
+                                            onChange={value => field.onChange(value)}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+
+                    <div className="space-y-6">
+                        <h1 className="text-base font-medium">Meta data</h1>
+
+                        <FormField 
+                            control={form.control}
+                            name="pageTitle"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-stone-400">Page title</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            disabled={loading}
+                                            {...field} 
+                                        />
+                                    </FormControl>
+                                    <FormDescription className="text-xs text-stone-400">
+                                        We&apos;ll use your product name for the page title unless you add a value above.
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
+                        <FormField 
+                            control={form.control}
+                            name="metaDescription"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-stone-400">Meta description</FormLabel>
+                                    <FormControl>
+                                        <Textarea
+                                            className="resize-none"
+                                            disabled={loading}
+                                            {...field} 
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
+                        <FormField 
+                            control={form.control}
+                            name="metaKeywords"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-stone-400">Meta keywords</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            disabled={loading}
+                                            {...field} 
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+
+                    <div className="space-y-6">
+                        <h1 className="text-base font-medium">Open Graph</h1>
+
+                        <FormField 
+                            control={form.control}
+                            name="pageTitle"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-stone-400">OG title</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            disabled={loading}
+                                            {...field} 
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
+                        <FormField 
+                            control={form.control}
+                            name="metaDescription"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-stone-400">OG description</FormLabel>
+                                    <FormControl>
+                                        <Textarea
+                                            className="resize-none"
+                                            disabled={loading}
+                                            {...field} 
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+
+                    <div>
+                        <FormField
+                            control={form.control}
+                            name="imageURL"
+                            render={({ field }) => (
+                                <FormItem >
+                                    <FormLabel className="text-base">Open Graph image</FormLabel>
+                                    <FormControl>
+                                        <OGImageUpload 
+                                            value={field.value}
+                                            disabled={loading}
+                                            onChange={value => field.onChange(value)}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+
                     <Button 
                         type="submit" 
                         disabled={loading}
