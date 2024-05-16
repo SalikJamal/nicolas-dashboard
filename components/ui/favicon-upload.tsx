@@ -43,7 +43,7 @@ export default function FaviconUpload({ value, onChange, disabled }: IFaviconUpl
                 >
                     Upload favicon
                     <input
-                        className="absolute top-0 left-2.5 opacity-0 w-28 h-10 cursor-pointer"
+                        className="absolute top-0 left-0.5 opacity-0 w-32 h-10 cursor-pointer"
                         type="file"
                         accept="image/*"
                         onChange={handleImageChange}

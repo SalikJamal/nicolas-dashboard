@@ -19,9 +19,9 @@ export default function SettingsPage() {
     const [option, setOption] = useState("metadata")
     
     return (
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col">
             <Header title="Settings" />
-            <div className="flex flex-col py-5 space-y-5 w-[400px] border-r h-full">
+            <div className="flex flex-col py-5 space-y-5 w-[400px] border-r h-full shadow-xl">
                 <div className="px-5">
                     <Select
                         onValueChange={(e) => setOption(e)} 

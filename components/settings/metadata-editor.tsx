@@ -26,7 +26,8 @@ const formSchema = z.object({
     metaKeywords: z.string().min(1, { message: "Meta keyword is required" }),
     ogTitle: z.string().min(1, { message: "OG title is required" }),
     ogDescription: z.string().min(1, { message: "OG description is required" }),
-    imageURL: z.string().min(1, { message: "Favicon is required" })
+    faviconImageURL: z.string().min(1, { message: "Favicon is required" }),
+    ogImageURL: z.string().min(1, { message: "OG Image is required" })
 })
 
 
@@ -42,7 +43,8 @@ export default function MetadataEditor() {
             metaKeywords: "Startup, landing page, page builder",
             ogTitle: "Startt - We help build your community",
             ogDescription: "We help build your community before you start building",
-            imageURL: ""
+            faviconImageURL: "",
+            ogImageURL: ""
         }
     })
 
@@ -64,7 +66,7 @@ export default function MetadataEditor() {
                     <div>
                         <FormField
                             control={form.control}
-                            name="imageURL"
+                            name="faviconImageURL"
                             render={({ field }) => (
                                 <FormItem >
                                     <FormLabel className="text-base">Favicon</FormLabel>
@@ -145,7 +147,7 @@ export default function MetadataEditor() {
 
                         <FormField 
                             control={form.control}
-                            name="pageTitle"
+                            name="ogTitle"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel className="text-stone-400">OG title</FormLabel>
@@ -162,7 +164,7 @@ export default function MetadataEditor() {
 
                         <FormField 
                             control={form.control}
-                            name="metaDescription"
+                            name="ogDescription"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel className="text-stone-400">OG description</FormLabel>
@@ -177,15 +179,21 @@ export default function MetadataEditor() {
                                 </FormItem>
                             )}
                         />
-                    </div>
 
-                    <div>
                         <FormField
                             control={form.control}
-                            name="imageURL"
+                            name="ogImageURL"
                             render={({ field }) => (
                                 <FormItem >
-                                    <FormLabel className="text-base">Open Graph image</FormLabel>
+                                    <FormLabel className="flex justify-between text-base">
+                                        Open Graph image
+                                        <span
+                                            className="text-xs text-gray-400 cursor-pointer"
+                                            onClick={() => field.onChange("")}
+                                        >
+                                            Remove
+                                        </span>
+                                    </FormLabel>
                                     <FormControl>
                                         <OGImageUpload 
                                             value={field.value}
@@ -193,6 +201,9 @@ export default function MetadataEditor() {
                                             onChange={value => field.onChange(value)}
                                         />
                                     </FormControl>
+                                    <FormDescription className="text-xs text-stone-400">
+                                        OG:image dimensions 1200px x 630px.
+                                    </FormDescription>
                                     <FormMessage />
                                 </FormItem>
                             )}
