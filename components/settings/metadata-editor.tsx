@@ -1,3 +1,5 @@
+"use client"
+
 import { z } from "zod"
 import { useState } from "react"
 import toast from "react-hot-toast"
