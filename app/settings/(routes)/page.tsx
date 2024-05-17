@@ -21,7 +21,7 @@ export default function SettingsPage() {
     return (
         <div className="flex flex-col">
             <Header title="Settings" />
-            <div className="flex flex-col py-5 space-y-5 w-[400px] border-r h-full shadow-xl">
+            <div className="flex flex-col py-5 space-y-5 w-[400px] h-full border-r shadow-xl">
                 <div className="px-5">
                     <Select
                         onValueChange={(e) => setOption(e)} 

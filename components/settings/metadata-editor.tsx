@@ -17,6 +17,7 @@ import {
 import FaviconUpload from "@/components/ui/favicon-upload"
 import OGImageUpload from "@/components/ui/og-image-upload"
 import { Textarea } from "@/components/ui/textarea"
+import { CircleHelp } from "lucide-react"
 
 
 type MetadataFormValues = z.infer<typeof formSchema>
@@ -94,6 +95,7 @@ export default function MetadataEditor() {
                                     <FormLabel className="text-stone-400">Page title</FormLabel>
                                     <FormControl>
                                         <Input
+                                            icon={<CircleHelp className="text-white bg-gray-500 rounded-full border-none outline-none absolute right-2 top-1/2 transform -translate-y-1/2 size-5" />}
                                             disabled={loading}
                                             {...field} 
                                         />
@@ -110,12 +112,13 @@ export default function MetadataEditor() {
                             control={form.control}
                             name="metaDescription"
                             render={({ field }) => (
-                                <FormItem>
+                                <FormItem className="blurry-textarea">
                                     <FormLabel className="text-stone-400">Meta description</FormLabel>
                                     <FormControl>
                                         <Textarea
                                             className="resize-none"
                                             disabled={loading}
+                                            icon={<CircleHelp className="text-white bg-gray-500 rounded-full border-none outline-none absolute right-2 top-5 transform -translate-y-1/2 size-5" />}
                                             {...field} 
                                         />
                                     </FormControl>
@@ -132,6 +135,7 @@ export default function MetadataEditor() {
                                     <FormLabel className="text-stone-400">Meta keywords</FormLabel>
                                     <FormControl>
                                         <Input
+                                            icon={<CircleHelp className="text-white bg-gray-500 rounded-full border-none outline-none absolute right-2 top-1/2 transform -translate-y-1/2 size-5" />}
                                             disabled={loading}
                                             {...field} 
                                         />
@@ -153,6 +157,7 @@ export default function MetadataEditor() {
                                     <FormLabel className="text-stone-400">OG title</FormLabel>
                                     <FormControl>
                                         <Input
+                                            icon={<CircleHelp className="text-white bg-gray-500 rounded-full border-none outline-none absolute right-2 top-1/2 transform -translate-y-1/2 size-5" />}
                                             disabled={loading}
                                             {...field} 
                                         />
@@ -172,6 +177,7 @@ export default function MetadataEditor() {
                                         <Textarea
                                             className="resize-none"
                                             disabled={loading}
+                                            icon={<CircleHelp className="text-white bg-gray-500 rounded-full border-none outline-none absolute right-2 top-5 transform -translate-y-1/2 size-5" />}
                                             {...field} 
                                         />
                                     </FormControl>
