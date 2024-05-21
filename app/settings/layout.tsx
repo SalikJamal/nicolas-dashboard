@@ -9,11 +9,11 @@ export default function SettingsLayout({ children }: IReactChildren) {
         <>
             <Header title="Settings" />
             <div className="flex flex-col min-h-[calc(100%-5rem)] sm:flex-row justify-between">
-                <LeftPanel />
+                <LeftPanel className="hidden md:flex" />
                 <main className="flex justify-center md:mt-40">
                     {children}
                 </main>
-                <RightPanel />
+                <RightPanel className="hidden md:flex" />
             </div>
         </>
     )

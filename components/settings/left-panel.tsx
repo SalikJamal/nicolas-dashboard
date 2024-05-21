@@ -11,14 +11,19 @@ import {
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import MetadataEditor from "@/components/settings/metadata-editor"
+import { cn } from "@/lib/utils"
+
+interface ILeftPanelProps {
+    className?: string;
+}
 
 
-export default function LeftPanel() {
+export default function LeftPanel({ className }: ILeftPanelProps) {
     
     const [option, setOption] = useState("metadata")
 
     return (
-        <div className="flex flex-col py-5 space-y-5 min-w-[400px] border-r shadow-xl">
+        <div className={cn("flex flex-col py-5 space-y-5 min-w-[400px] border-r shadow-xl", className)}>
             <div className="px-5">
                 <Select
                     onValueChange={(e) => setOption(e)} 
