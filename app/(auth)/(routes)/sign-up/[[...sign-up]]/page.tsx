@@ -31,7 +31,7 @@ export default function SignUpPage() {
                                             Create your account
                                         </CardTitle>
                                         <CardDescription>
-                                            Welcome! Please fill in the details to get started.
+                                            Welcome! Sign up to get started
                                         </CardDescription>
                                     </CardHeader>
                                     
@@ -58,7 +58,7 @@ export default function SignUpPage() {
                                             </Clerk.Connection>
                                         </div>
                                         
-                                        <p className="flex items-center gap-x-3 text-sm text-muted-foreground before:h-px before:flex-1 before:bg-border after:h-px after:flex-1 after:bg-border">
+                                        {/* <p className="flex items-center gap-x-3 text-sm text-muted-foreground before:h-px before:flex-1 before:bg-border after:h-px after:flex-1 after:bg-border">
                                             or
                                         </p>
 
@@ -103,12 +103,12 @@ export default function SignUpPage() {
                                                 <Input />
                                             </Clerk.Input>
                                             <Clerk.FieldError className="block text-sm text-destructive" />
-                                        </Clerk.Field>
+                                        </Clerk.Field> */}
                                     </CardContent>
 
                                     <CardFooter>
                                         <div className="grid w-full gap-y-4">
-                                            <SignUp.Action submit asChild>
+                                            {/* <SignUp.Action submit asChild>
                                                 <Button disabled={isGlobalLoading}>
                                                     <Clerk.Loading>
                                                         {(isLoading) => {
@@ -116,7 +116,7 @@ export default function SignUpPage() {
                                                         }}
                                                     </Clerk.Loading>
                                                 </Button>
-                                            </SignUp.Action>
+                                            </SignUp.Action> */}
                                             
                                             <Button variant="link" size="sm" asChild>
                                                 <Link href="/sign-in">Already have an account? Sign in</Link>

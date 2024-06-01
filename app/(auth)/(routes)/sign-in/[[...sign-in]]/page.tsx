@@ -71,7 +71,7 @@ export default function SignInPage() {
 
                                         </div>
 
-                                        <p className="flex items-center gap-x-3 text-sm text-muted-foreground before:h-px before:flex-1 before:bg-border after:h-px after:flex-1 after:bg-border">
+                                        {/* <p className="flex items-center gap-x-3 text-sm text-muted-foreground before:h-px before:flex-1 before:bg-border after:h-px after:flex-1 after:bg-border">
                                             or
                                         </p>
 
@@ -89,21 +89,21 @@ export default function SignInPage() {
                                                 <Input />
                                             </Clerk.Input>
                                             <Clerk.FieldError className="block text-sm text-destructive" />
-                                        </Clerk.Field>
+                                        </Clerk.Field> */}
 
-                                        <Button
+                                        {/* <Button
                                             type="button"
                                             variant="link" 
                                             size="sm"
                                             onClick={signInWithPasskey}
                                         >
                                             Use passkeys instead
-                                        </Button>
+                                        </Button> */}
                                     </CardContent>
 
                                     <CardFooter>
                                         <div className="grid w-full gap-y-4">
-                                            <SignIn.Action submit asChild>
+                                            {/* <SignIn.Action submit asChild>
                                                 <Button disabled={isGlobalLoading}>
                                                     <Clerk.Loading>
                                                         {(isLoading) => {
@@ -111,7 +111,7 @@ export default function SignInPage() {
                                                         }}
                                                     </Clerk.Loading>
                                                 </Button>
-                                            </SignIn.Action>
+                                            </SignIn.Action> */}
 
                                             <Button variant="link" size="sm" asChild>
                                                 <Link href="/sign-up">
@@ -123,7 +123,7 @@ export default function SignInPage() {
                                 </Card>
                             </SignIn.Step>
 
-                            <SignIn.Step name="verifications">
+                            {/* <SignIn.Step name="verifications">
                                 <SignIn.Strategy name="email_link">
                                     <Card className="w-full sm:w-96">
                                         <CardHeader>
@@ -134,7 +134,7 @@ export default function SignInPage() {
                                         </CardHeader>
                                     </Card>
                                 </SignIn.Strategy>
-                            </SignIn.Step>
+                            </SignIn.Step> */}
                         </>
                     )}
                 </Clerk.Loading>
