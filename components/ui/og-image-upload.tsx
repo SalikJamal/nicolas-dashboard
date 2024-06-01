@@ -1,13 +1,14 @@
-import { ChangeEvent } from "react"
 import Image from "next/image"
+import { ChangeEvent } from "react"
+import { PlusIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { PlusIcon } from "lucide-react";
 
 interface IOGImageUploadProps {
     value: string;
     onChange: (value: string) => void;
     disabled?: boolean;
 }
+
 
 export default function OGImageUpload({ value, onChange, disabled }: IOGImageUploadProps) {
     
