@@ -1,4 +1,5 @@
 import { getPost } from "@/actions/get-post"
+import Editor from "@/components/editor"
 import Post from "@/components/post"
 
 interface IPostPageProps {
