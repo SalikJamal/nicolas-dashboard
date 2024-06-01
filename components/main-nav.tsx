@@ -17,6 +17,11 @@ export default function MainNav({ className, ...props }: HTMLAttributes<HTMLDivE
             active: pathname === "/"
         },
         {
+            href: "/posts",
+            label: "Posts",
+            active: pathname === "/posts"
+        },
+        {
             href: "/settings",
             label: "Settings",
             active: pathname === "/settings"
