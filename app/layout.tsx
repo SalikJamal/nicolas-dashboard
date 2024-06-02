@@ -2,7 +2,8 @@ import { ClerkProvider } from "@clerk/nextjs"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import ToastProvider from "@/providers/toast-provider"
-import "./globals.css"
+import "@/styles/globals.css"
+import "@/styles/prosemirror.css"
 
 const inter = Inter({ subsets: ["latin"] })
 
