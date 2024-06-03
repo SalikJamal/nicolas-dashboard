@@ -11,10 +11,11 @@ import {
   Text,
   TextQuote,
   Youtube,
-} from "lucide-react";
-import { createSuggestionItems } from "novel/extensions";
-import { Command, renderItems } from "novel/extensions";
-import { uploadFn } from "./image-upload";
+} from "lucide-react"
+import { createSuggestionItems } from "novel/extensions"
+import { Command, renderItems } from "novel/extensions"
+import { uploadFn } from "./image-upload"
+
 
 export const suggestionItems = createSuggestionItems([
   {
@@ -137,7 +138,8 @@ export const suggestionItems = createSuggestionItems([
         /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/,
       );
 
-      if (ytregex.test(videoLink)) {
+      
+      if (videoLink && ytregex.test(videoLink)) {
         editor
           .chain()
           .focus()
@@ -153,7 +155,7 @@ export const suggestionItems = createSuggestionItems([
       }
     },
   },
-]);
+])
 
 export const slashCommand = Command.configure({
   suggestion: {

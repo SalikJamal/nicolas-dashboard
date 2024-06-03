@@ -1,5 +1,4 @@
 import { getPost } from "@/actions/get-post"
-import Editor from "@/components/editor"
 import AdvancedEditor from "@/components/editor/advanced-editor"
 import Post from "@/components/post"
 

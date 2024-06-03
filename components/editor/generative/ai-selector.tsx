@@ -27,6 +27,7 @@ export function AISelector({ onOpenChange }: AISelectorProps) {
 
   const [inputValue, setInputValue] = useState("")
   const { editor } = useEditor()
+  
 
   const { completion, complete, isLoading } = useCompletion({
     // id: "novel",
@@ -43,6 +44,8 @@ export function AISelector({ onOpenChange }: AISelectorProps) {
   })
 
   const hasCompletion = completion.length > 0
+
+  if(!editor) return
 
   return (
     <Command className="w-[350px]">

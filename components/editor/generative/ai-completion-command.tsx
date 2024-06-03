@@ -12,6 +12,7 @@ const AICompletionCommands = ({
 }) => {
 
   const { editor } = useEditor()
+  if(!editor) return
 
   return (
     <>
