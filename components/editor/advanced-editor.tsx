@@ -23,19 +23,22 @@ import GenerativeMenuSwitch from "./generative/generative-menu-switch"
 import { uploadFn } from "./image-upload"
 import { TextButtons } from "./selectors/text-buttons"
 import { slashCommand, suggestionItems } from "./slash-command"
+import { Markdown } from "tiptap-markdown"
 import { IPost } from "@/lib/types"
+import { Button } from "@/components/ui/button"
+import { markdownContent } from "@/lib/content"
 
 const hljs = require('highlight.js')
 
-const extensions = [...defaultExtensions, slashCommand]
+const extensions = [...defaultExtensions, slashCommand, Markdown]
 
 interface IAdvancedEditorProps {
-  post: IPost;
+  post: IPost & { image: string; };
 }
 
 export default function AdvancedEditor({ post }: IAdvancedEditorProps) {
 
-  const [initialContent, setInitialContent] = useState<null | JSONContent>(null)
+  const [initialContent, setInitialContent] = useState<JSONContent | null>(null)
   const [saveStatus, setSaveStatus] = useState("Saved")
   const [charsCount, setCharsCount] = useState()
 
@@ -43,36 +46,6 @@ export default function AdvancedEditor({ post }: IAdvancedEditorProps) {
   const [openColor, setOpenColor] = useState(false)
   const [openLink, setOpenLink] = useState(false)
   const [openAI, setOpenAI] = useState(false)
-
-  const editorContent = {
-    type: "doc",
-    content: [
-      {
-        type: "heading",
-        attrs: { level: 2 },
-        content: [{ type: "text", text: post.title }],
-      },
-      {
-        type: "paragraph",
-        content: [
-          {
-            type: "text",
-            text: post.body,
-          }
-        ]
-      },
-      {
-        type: "image",
-        attrs: {
-          src: "https://public.blob.vercel-storage.com/pJrjXbdONOnAeZAZ/banner-2wQk82qTwyVgvlhTW21GIkWgqPGD2C.png",
-          alt: "banner.png",
-          title: "banner.png",
-          width: null,
-          height: null,
-        },
-      },
-    ]
-  }
 
   //Apply Codeblock Highlighting on the HTML from editor.getHTML()
   const highlightCodeblocks = (content: string) => {
@@ -94,25 +67,33 @@ export default function AdvancedEditor({ post }: IAdvancedEditorProps) {
     setSaveStatus("Saved");
   }, 500);
 
+  const publishPost = () => {
+    console.log(window.localStorage.getItem("markdown"))
+  }
+
   useEffect(() => {
-    setInitialContent(editorContent)
-  }, []);
+    setInitialContent({
+      type: "doc",
+      content: []
+    })
+  }, [])
 
   if (!initialContent) return null;
 
   return (
     <div className="relative w-full">
       <div className="flex absolute right-5 top-5 z-10 mb-5 gap-2">
-        <div className="rounded-lg bg-accent px-2 py-1 text-sm text-muted-foreground">{saveStatus}</div>
-        <div className={charsCount ? "rounded-lg bg-accent px-2 py-1 text-sm text-muted-foreground" : "hidden"}>
+        <div className="flex justify-center items-center rounded-lg bg-accent px-2 py-1 text-sm text-muted-foreground">{saveStatus}</div>
+        <div className={charsCount ? "flex justify-center items-center rounded-lg bg-accent px-2 py-1 text-sm text-muted-foreground" : "hidden"}>
           {charsCount} Words
         </div>
+        <Button size="sm" onClick={publishPost}>Publish</Button>
       </div>
       <EditorRoot>
         <EditorContent
           initialContent={initialContent}
           extensions={extensions}
-          className="relative min-h-[500px] w-full border-muted bg-background sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:shadow-lg"
+          className="relative min-h-[500px] border-muted bg-background sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:shadow-lg"
           editorProps={{
             handleDOMEvents: {
               keydown: (_view, event) => handleCommandNavigation(event),
@@ -128,6 +109,7 @@ export default function AdvancedEditor({ post }: IAdvancedEditorProps) {
             debouncedUpdates(editor);
             setSaveStatus("Unsaved");
           }}
+          onCreate={({ editor }) => editor.commands.setContent(markdownContent)}
           slotAfter={<ImageResizer />}
         >
           <EditorCommand className="z-50 h-auto max-h-[330px] overflow-y-auto rounded-md border border-muted bg-background px-1 py-2 shadow-md transition-all">
