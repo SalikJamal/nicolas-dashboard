@@ -8,7 +8,7 @@ interface IInviteModalStore {
 
 
 const useInviteModal = create<IInviteModalStore>(set => ({
-    isOpen: true,
+    isOpen: false,
     onOpen: () => set({ isOpen: true }),
     onClose: () => set({ isOpen: false })
 }))
