@@ -30,8 +30,8 @@ const formSchema = z.object({
     emails: z.array(
         z.object({
             id: z.string(),
-            text: z.string()
-        })
+            text: z.string().email({ message: "Please enter a valid email address" })
+        }).required()
     ),
     role: z.string().min(1, { message: "Please select a role" })
 })
@@ -52,6 +52,11 @@ export default function InviteMembersModal() {
 
     const inviteModal = useInviteModal()
     const { setValue } = form
+
+    // Check if tag is valid email address
+    const validateTag = (tag: string): boolean => {
+        return (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/).test(tag)
+    }
 
     const onSubmit = (data: z.infer<typeof formSchema>) => {
         console.log(data)
@@ -78,10 +83,12 @@ export default function InviteMembersModal() {
                                 <FormControl className="flex-wrap">
                                     <TagInput
                                         className="shadow-none"
+                                        type="email"
                                         activeTagIndex={activeTagIndex}
                                         setActiveTagIndex={setActiveTagIndex}
                                         tags={tags}
                                         setTags={(newTags) => { setTags(newTags); setValue('emails', newTags as [Tag, ...Tag[]])}}
+                                        validateTag={validateTag}
                                         {...field}
                                     />
                                 </FormControl>
@@ -96,30 +103,31 @@ export default function InviteMembersModal() {
                         render={({ field }) => (
                             <FormItem className="w-1/2">
                                 <FormLabel className="text-left text-sm font-normal">Role</FormLabel>
-                                <Select 
-                                    value={field.value}
-                                    onValueChange={field.onChange}
-                                    defaultValue={field.value}
-                                >
-                                    <FormControl>
+                                <FormControl>
+                                    <Select 
+                                        value={field.value}
+                                        onValueChange={field.onChange}
+                                        defaultValue={field.value}
+                                    >
                                         <SelectTrigger>
                                             <SelectValue
                                                 placeholder="Select an option"
                                                 defaultValue={field.value}
                                             />
                                         </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        {roles.map(role => (
-                                            <SelectItem 
-                                                key={role.id} 
-                                                value={role.id}
-                                            >
-                                                {role.name}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
+                                        <SelectContent>
+                                            {roles.map(role => (
+                                                <SelectItem 
+                                                    key={role.id} 
+                                                    value={role.id}
+                                                >
+                                                    {role.name}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                </FormControl>
+
                                 <FormMessage />
                             </FormItem>
                         )}
